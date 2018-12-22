@@ -70,31 +70,24 @@ class CtrlVisiteur {
 
     public function pageListePublique() {
         global $vues;
-        $listeTache = Model::getTachesPublique($_REQUEST['listeId']);
+        $isListePrive = Model::isListePrive($_REQUEST['listeId']);
+        $utilisateur = Model::isConnecte();
+        if ($isListePrive && $utilisateur != null) {
+            $listeTache = ModelUtilisateur::getTachesPrive($_REQUEST['listeId']);
+        } else {
+            $listeTache = Model::getTachesPublique($_REQUEST['listeId']);
+        }
         require($vues['listeTacheView']);
     }
 
     public function validerTache() {
         Model::validerTache($_REQUEST['tacheId']);
-        $utilisateur = Model::isConnecte();
-        if (isset($utilisateur)) {
-            $_REQUEST['action'] = "cliqueListePrive";
-            new CtrlUtilisateur();
-        } else {
-            $this->pageListePublique();
-        }
-
+        $this->pageListePublique();
     }
 
     public function annulerTache() {
         Model::annulerTache($_REQUEST['tacheId']);
-        $utilisateur = Model::isConnecte();
-        if (isset($utilisateur)) {
-            $_REQUEST['action'] = "cliqueListePrive";
-            new CtrlUtilisateur();
-        } else {
-            $this->pageListePublique();
-        }
+        $this->pageListePublique();
     }
 
     public function modifierListe() {
