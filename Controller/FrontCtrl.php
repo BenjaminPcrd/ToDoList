@@ -3,7 +3,7 @@
 class FrontCtrl {
     public function __construct() {
         $actionVisiteur = array("cliqueListe", "validerTache", "annulerTache", "modifierListe", "supprimerTache", "ajouterTache", "validerAjouterTache", "inscription", "connection", "validerInscription", "validerConnection", "ajouterListe", "validerAjouterListe", "supprimerListe");
-        $actionUtilisateur = array("deconnection", "ajouterListePrive", "cliqueListePrive");
+        $actionUtilisateur = array("deconnection", "ajouterListePrive", "cliqueListePrive", "validerAjouterListeUtilisateur");
         session_start();
         try {
             $utilisateur = Model::isConnecte();

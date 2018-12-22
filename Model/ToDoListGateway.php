@@ -79,6 +79,13 @@ class ToDoListGateway {
         return $user;
     }
 
+    public function isListePrive($listeId) {
+        $query = 'Select private From ToDoList Where id=:listeId;';
+        $this->bd->executeQuery($query, array(':listeId' => array($listeId, PDO::PARAM_INT)));
+        $result = $this->bd->getResults();
+        return $result[0]['private'];
+    }
+
     public function ajouterListe($titre, $auteur) {
         $query = 'Insert Into ToDoList Values(null, :nom, :auteur, :bool);';
         $this->bd->executeQuery($query, array(':nom' => array($titre, PDO::PARAM_STR),
@@ -104,5 +111,12 @@ class ToDoListGateway {
             $listes[] = $liste;
         }
         return $listes;
+    }
+
+    public function ajouterListeUtilisateur($titre, $auteur, $isPrive) {
+        $query = 'Insert Into ToDoList Values(null, :nom, :auteur, :bool);';
+        $this->bd->executeQuery($query, array(':nom' => array($titre, PDO::PARAM_STR),
+                                              ':auteur' => array($auteur, PDO::PARAM_STR),
+                                              ':bool' => array($isPrive, PDO::PARAM_BOOL)));
     }
 }

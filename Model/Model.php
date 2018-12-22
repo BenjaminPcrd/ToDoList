@@ -62,6 +62,11 @@ class Model {
         }
     }
 
+    public static function isListePrive($listeId) {
+        $toDoListGateway = new ToDoListGateway(new Connexion('mysql:host=localhost;dbname=maBase;charset=utf8', 'benjam', '123'));
+        return $toDoListGateway->isListePrive($listeId);
+    }
+
     public static function ajouterListe($titre, $auteur) {
         $toDoListGateway = new ToDoListGateway(new Connexion('mysql:host=localhost;dbname=maBase;charset=utf8', 'benjam', '123'));
         $toDoListGateway->ajouterListe($titre, $auteur);

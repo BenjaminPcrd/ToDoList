@@ -25,7 +25,11 @@ echo "<input type ='submit' value='Ajouter une tâche'/>";
 echo "</li></form>";
 echo "</ul>";
 
-echo "<form method='post' action='?action=cliqueListe&listeId=" . $_REQUEST['listeId'] . "'>";
+if (isset($utilisateur)) {
+    echo "<form method='post' action='?action=cliqueListePrive&listeId=" . $_REQUEST['listeId'] . "'>";
+} else {
+    echo "<form method='post' action='?action=cliqueListe&listeId=" . $_REQUEST['listeId'] . "'>";
+}
 echo "<input type ='submit' value='Terminer la modification'/>";
 echo "</form>";
 

@@ -5,21 +5,31 @@
 <body>
 <a href="index.php">Retour accueil</a>
 
-
-<form method='post' action='?action=validerAjouterListe'>
-<p>
-    <h1>FAIRE AJOUTER LISTE PRIVEE</h1>
-    <label> Titre de la Liste : <input type="text" name="titre" /></label><br>
-    <label> Auteur : <input type="text" name="auteur"/></label><br>
-    <input type="submit" value="Créer la liste" />
-</p>
-</form>
-<p>
-
-    <?php
+<?php
     if(isset($utilisateur)) {
-        echo $utilisateur;
+        echo "<form method='post' action='?action=validerAjouterListeUtilisateur'>";
+        echo "<p>";
+        echo "<label> Titre de la Liste : <input type='text' name='titre' /></label><br>";
+        //echo "<label> Auteur : <input type='text' name='auteur'/></label><br>";
+        echo "<label> Liste privée <input type='checkbox' name='isPrive' checked></label><br>";
+        echo "<input type='submit' value='Créer la liste' />";
+        echo "</p>";
+        echo "</form>";
+        echo "<p>";
+        echo $utilisateur . "<br>";
+    } else {
+        echo "<form method='post' action='?action=validerAjouterListe'>";
+        echo "<p>";
+        echo "<label> Titre de la Liste : <input type='text' name='titre' /></label><br>";
+        echo "<label> Auteur : <input type='text' name='auteur'/></label><br>";
+        echo "<input type='submit' value='Créer la liste' />";
+        echo "</p>";
+        echo "</form>";
+        echo "<p>";
     }
+
+
+
     ?>
 
     <?php
