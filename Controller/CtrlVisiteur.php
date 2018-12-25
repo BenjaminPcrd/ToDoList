@@ -73,11 +73,13 @@ class CtrlVisiteur {
         $isListePrive = Model::isListePrive($_REQUEST['listeId']);
         $utilisateur = Model::isConnecte();
         if ($isListePrive && $utilisateur != null) {
-            $listeTache = ModelUtilisateur::getTachesPrive($_REQUEST['listeId']);
+            $_REQUEST['action'] = "cliqueListePrive";
+            new CtrlUtilisateur();
         } else {
             $listeTache = Model::getTachesPublique($_REQUEST['listeId']);
+            require($vues['listeTacheView']);
         }
-        require($vues['listeTacheView']);
+
     }
 
     public function validerTache() {
@@ -203,13 +205,26 @@ class CtrlVisiteur {
                 $titre = $_POST['titre'];
                 $auteur = $_POST['auteur'];
                 Model::ajouterListe($titre, $auteur);
-                $this->pagePrinc();
+                //$this->pagePrinc();
+                $utilisateur = Model::isConnecte();
+                if ($utilisateur != null) {
+                    $_REQUEST['action'] = null;
+                    new CtrlUtilisateur();
+                } else {
+                    $this->pagePrinc();
+                }
             }
         }
     }
 
     public function supprimerListe() {
         Model::supprimerListe($_REQUEST['listeId']);
-        $this->pagePrinc();
+        $utilisateur = Model::isConnecte();
+        if ($utilisateur != null) {
+            $_REQUEST['action'] = null;
+            new CtrlUtilisateur();
+        } else {
+            $this->pagePrinc();
+        }
     }
 }
