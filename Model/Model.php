@@ -54,8 +54,8 @@ class Model {
 
     public static function isConnecte() {
         if(isset($_SESSION['login']) && isset($_SESSION['role'])) {
-            $login = $_SESSION['login'];
-            $role = $_SESSION['role'];
+            $login = $_SESSION['login']; //Validation::nettoyer_string($_SESSION['login']);
+            $role = $_SESSION['role']; //Validation::nettoyer_string($_SESSION['role']);
             return new User($login, $role);
         } else {
             return null;
